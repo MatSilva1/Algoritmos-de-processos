@@ -5,12 +5,13 @@
 
 int processos[tam];           //Fila de processos
 int numProcessos;
-int quantum;                //Numero de quantum
+int quantum;                //Numero de contas pra pagar no caixa
 
 void Tipo(){
     
     int aux;
-    int contadorFila=numProcessos;
+    int contadorFila=numProcessos;  /* Define tipo de processo para ter prioridade (sendo que CPU não recebe 
+                                        tempo de espera e tempo de processamento)*/
     while(contadorFila !=0){
         printf("Selecione o tipo do processo");
         printf("1 para I/O");
@@ -27,15 +28,16 @@ void Espera(){
     int tempoEspera;
     
     
-    // Criar funcao espera
+    // Criar funcao espera e definir tempo de espera
+    //Criar filtro para CPU, ele nao recebe tempo de espera
 }
 
 void tempoProcessador(){
     
     int processamento;
-    
+    // Definir tempo de processamento
      printf("\nExecuta ate %d de tempo de processamento", processamento);
-        processos[frenteFila] = processos[frenteFila] - processamento;        //Subtraido o valor de quantum
+        processos[frenteFila] = processos[frenteFila] - processamento;        //Pagamento de quantum contas
         if( processos[frenteFila]<=0){
             printf("\nFinalizado.\n");
             contadorFila--;
@@ -49,16 +51,16 @@ void tempoProcessador(){
         getchar();
     }
     
-    Espera();
+    Espera();   //Criar filtro para CPU, ele nao recebe tempo de processamento
 }
 
-void calcQuantum(){       //Para que o usuario possa testar com diferentes quantidades de tempo de execução
+void calcQuantum(){       //Para que o usuario possa testar com diferentes quantidades de contas
     int numero;
     int i;
     for (i=1; i<=numProcessos; i++){
         printf("\nDigite a quantidade de tempo de execução por processo %d:", i);
         scanf("%d", &numero);               //Leitura de valor inserido pelo usuario
-        processos[i]= numero;                 //cada processo recebe o valor informado
+        processos[i]= numero;                 //cada pessoa recebe o valor informado
     }
 }
 
@@ -69,7 +71,7 @@ void calcQuantum(){       //Para que o usuario possa testar com diferentes quant
 } */
 
 void fila(){
-    int contadorFila=numProcessos;            //contagem de processos que estão na fila
+    int contadorFila=numProcessos;            //contagem de pessoas que estão na fila
     int frenteFila = 1;                 //Primeira posição da fila
     while(contadorFila !=0){
         while(processos[frenteFila] <= 0){ //Tira processos que não tem tempo da primeira posição
@@ -79,7 +81,7 @@ void fila(){
         }
         printf("\n\nO processo %d vai para o execução com %d tempo", frenteFila , processos[frenteFila]);
         printf("\nExecuta ate %d quantum", quantum);
-        processos[frenteFila] = processos[frenteFila] - quantum;        //Subtraido de quantum contas
+        processos[frenteFila] = processos[frenteFila] - quantum;        //Pagamento de quantum contas
         if( processos[frenteFila]<=0){
             printf("\nE sai da fila.\n");
             contadorFila--;
